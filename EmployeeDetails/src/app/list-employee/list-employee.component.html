@@ -1,0 +1,70 @@
+<!-- <add-employee></add-employee> -->
+<div class="container-fluid col-lg-6 col-md-8 col">
+  <h4>Create Employee</h4>
+  <form [formGroup]='addEmployee' (ngSubmit)="addEmp()">
+    <div class="form-group">
+        <label >First Name</label>
+        <input type="text" class="form-control"   formControlName='firstName'   placeholder="Enter First Name">
+        <div *ngIf="f.firstName.touched && f.firstName.invalid" class="alert alert-danger">
+          <p class="danger">First Name should be of atleast 3 charater</p>
+          <p class="danger">First Name cannot be empty</p>
+      </div>
+    </div>
+    <div class="form-group">
+        <label >Last Name</label>
+        <input type="text" class="form-control"   formControlName='lastName'   placeholder="Enter Last Name">
+        <div *ngIf="f.lastName.touched && f.lastName.invalid" class="alert alert-danger">
+          <p class="danger">Last Name should be of atleast 3 charater</p>
+          <p class="danger">Last Name cannot be empty</p>
+      </div>
+    </div>
+    <div class="form-group">
+        <label >Email</label>
+        <input type="email" class="form-control" formControlName='email'   placeholder="Enter Email">
+        <div *ngIf="f.email.touched && f.email.invalid" class="alert alert-danger">
+          <p class="danger">Email format is Invalid</p>
+          <p class="danger">Email  is required</p>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form> 
+</div>
+<br>
+<div class="container">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th><h4>Employee List</h4></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th> <button class="btn btn-success">Create Employee</button> &nbsp;
+        <button class="btn btn-danger" (click)="deleteAllEmp()">Delete All</button></th>
+        
+      </tr>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First Name</th>
+      <th scope="col">last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let emp of collection ; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        {{ emp.firstName }}
+      </td>
+      <td>{{ emp.lastName}}</td>
+      <td>{{ emp.email }}</td>
+      <td><button class="btn btn-danger" (click)="deleteEmp(emp.id)">Delete</button> &nbsp;
+        <button class="btn btn-info"routerLink="/update/{{emp.id}}">Update</button> &nbsp;
+        <button class="btn btn-info" routerLink="/empdetails/{{emp.id}}">Details</button> &nbsp;
+        
+    </td>
+      
+    </tr>
+    </tbody>
+  </table>
+</div>
